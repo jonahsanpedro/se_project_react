@@ -57,12 +57,21 @@
   width: 100%;
 }
 
-.modal__input {
+.modal__label {
   display: block;
+  margin-bottom: 4px;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: "Cabinet Grotesk", Arial, sans-serif;
+}
+
+.modal__input {
   width: 100%;
+  font-family: "Cabinet Grotesk", Arial, sans-serif;
   border: none;
   border-bottom: 1px solid #000000;
   margin-bottom: 24px;
+  padding: 0 0 5px 0;
 }
 
 .modal__fieldset {
@@ -74,18 +83,24 @@
   width: 124px;
   height: 36px;
   border: none;
-  background-color: #0000003d;
+  background-color: #000000;
+  opacity: 30%;
   border-radius: 4px;
   color: white;
 }
 
 .modal__radio-buttons {
+  font-family: "Cabinet Grotesk", Arial, sans-serif;
   border: none;
   padding: 0;
   padding-bottom: 32px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
+}
+
+.modal__radio-input {
+  accent-color: #000000;
 }
 
 .modal__legend {
