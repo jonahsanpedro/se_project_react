@@ -1,0 +1,23 @@
+.modal__image {
+  width: 100%;
+}
+
+.modal__close {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.modal__close-icon {
+  background: none;
+}
+
+.modal__content_type_image {
+  padding: 0;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.modal__footer {
+  padding: 20px;
+}
