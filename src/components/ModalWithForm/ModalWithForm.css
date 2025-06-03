@@ -41,7 +41,6 @@
   background-color: white;
   font-family: "Cabinet Grotesk", Arial, sans-serif;
   position: relative;
-  padding: 28px 28px 36px;
   max-width: 496px;
   box-sizing: border-box;
   width: 100%;
@@ -49,6 +48,7 @@
   font-size: 16px;
   font-weight: 700;
   line-height: 20px;
+  padding: 28px 28px 36px;
 }
 
 .modal__form {
@@ -80,13 +80,19 @@
 }
 
 .modal__submit {
+  font-family: "Cabinet Grotesk", Arial, sans-serif;
   width: 124px;
   height: 36px;
   border: none;
   background-color: #000000;
-  opacity: 30%;
   border-radius: 4px;
   color: white;
+  cursor: pointer;
+}
+
+.modal__submit:hover {
+  background-color: #000000;
+  opacity: 0.6;
 }
 
 .modal__radio-buttons {
@@ -105,4 +111,8 @@
 
 .modal__legend {
   padding-bottom: 12px;
+}
+
+.modal__footer {
+  padding: 0;
 }
