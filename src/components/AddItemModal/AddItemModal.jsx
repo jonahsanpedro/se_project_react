@@ -50,7 +50,7 @@ export default function AddItemModal({
           onChange={handleNameChange}
           value={name}
           required
-          minLength="1"
+          minLength="2"
           maxLength="30"
         />
       </label>

@@ -1,6 +1,5 @@
 import "./ItemModal.css";
 import close from "../../assets/closewhite.svg";
-import { deleteCard } from "../../utils/api.js";
 
 function ItemModal({ isOpen, onClose, card, onDeleteItem }) {
   return (
