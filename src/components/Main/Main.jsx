@@ -28,8 +28,6 @@ function Main({ weatherData, handleCardClick, clothingItems }) {
                   key={item._id}
                   item={item}
                   onCardClick={handleCardClick}
-                  name={item.name}
-                  imageUrl={item.imageUrl}
                 />
               );
             })}

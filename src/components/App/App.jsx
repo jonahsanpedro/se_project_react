@@ -7,9 +7,9 @@ import {
   APIkey,
   defaultClothingItems,
 } from "../../utils/constants";
-import Header from "/src/components/Header/Header.jsx";
-import Main from "/src/components/Main/Main.jsx";
-import Footer from "/src/components/Footer/Footer.jsx";
+import Header from "../Header/Header.jsx";
+import Main from "../Main/Main.jsx";
+import Footer from "../Footer/Footer.jsx";
 import ItemModal from "../ItemModal/ItemModal";
 import Profile from "../Profile/Profile.jsx";
 import { filterWeatherData, getWeather } from "../../utils/weatherApi";
@@ -81,7 +81,6 @@ function App() {
   useEffect(() => {
     getItems()
       .then((data) => {
-        console.log(clothingItems);
         setClothingItems(data);
       })
       .catch(console.error);

@@ -8,20 +8,20 @@ function ClothesSection({
   handleAddClick,
 }) {
   return (
-    <main className="clothessection__user-container">
-      <header className="clothessection__header">
-        <p className="clothessection__title">Your Items</p>
+    <main className="clothes-section__user-container">
+      <header className="clothes-section__header">
+        <p className="clothes-section__title">Your Items</p>
         <button
           onClick={handleAddClick}
           type="button"
-          className="clothessection__add-new-btn"
+          className="clothes-section__add-new-btn"
         >
           + Add New
         </button>
       </header>
-      <section className="clothessection__cards-container">
-        <section className="clothessection__cards">
-          <ul className="clothessection__cards-list">
+      <section className="clothes-section__cards-container">
+        <section className="clothes-section__cards">
+          <ul className="clothes-section__cards-list">
             {clothingItems.map((filteredCard) => (
               <ItemCard
                 key={filteredCard._id}
