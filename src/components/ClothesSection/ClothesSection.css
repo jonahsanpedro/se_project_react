@@ -31,3 +31,15 @@
   grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
 }
+
+@media screen and (max-width: 375px) {
+  .clothes-section__cards-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow-x: hidden;
+    margin: 0;
+    justify-content: center;
+    max-width: 100%;
+    gap: 10px;
+  }
+}

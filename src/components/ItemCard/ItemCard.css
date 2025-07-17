@@ -22,6 +22,7 @@
   width: 100%;
   border-radius: 19px;
   border: 1px solid #000;
+  cursor: pointer;
 }
 
 .cards__text {
@@ -29,4 +30,17 @@
   font-size: 20px;
   font-weight: 700;
   line-height: 100%;
+}
+
+.card__like-button {
+  position: absolute;
+  top: 17px;
+  right: 80px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.card__like-button_active img {
+  content: url(../../assets/likedbutton.svg);
 }

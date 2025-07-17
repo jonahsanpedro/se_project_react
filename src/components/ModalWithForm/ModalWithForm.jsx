@@ -39,12 +39,14 @@ function ModalWithForm({
         <button onClick={onClose} type="button" className="modal__close">
           <img src={close} alt="Close" className="modal__close-icon" />
         </button>
-        <form onSubmit={onSubmit} className="modal__form">
-          {children}
-          <button type="submit" className="modal__submit">
-            {buttonText}
-          </button>
-        </form>
+        <div className="modal__buttons">
+          <form onSubmit={onSubmit} className="modal__form">
+            {children}
+            <button type="submit" className="modal__submit">
+              {buttonText}
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );
