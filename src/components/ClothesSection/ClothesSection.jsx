@@ -8,8 +8,11 @@ function ClothesSection({
   handleCardClick,
   handleAddClick,
   handleCardLike,
+  isLoggedIn,
 }) {
   const currentUser = useContext(CurrentUserContext);
+
+  console.log("isLoggedIn:", isLoggedIn, "currentUser:", currentUser);
 
   return (
     <main className="clothes-section__user-container">
@@ -26,14 +29,17 @@ function ClothesSection({
       <section className="clothes-section__cards-container">
         <section className="clothes-section__cards">
           <ul className="clothes-section__cards-list">
-            {clothingItems.map((filteredCard) => (
-              <ItemCard
-                key={filteredCard._id}
-                item={filteredCard}
-                onCardClick={handleCardClick}
-                onCardLike={handleCardLike}
-              />
-            ))}
+            {clothingItems
+              .filter((filteredCard) => filteredCard.owner === currentUser._id)
+              .map((filteredCard) => (
+                <ItemCard
+                  key={filteredCard._id}
+                  item={filteredCard}
+                  onCardClick={handleCardClick}
+                  onCardLike={handleCardLike}
+                  isLoggedIn={isLoggedIn}
+                />
+              ))}
           </ul>
         </section>
       </section>

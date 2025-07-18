@@ -2,29 +2,30 @@ import { useState, useEffect } from "react";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 
 import "./App.css";
-import { coordinates, APIkey } from "../../utils/constants";
 import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
 import Footer from "../Footer/Footer.jsx";
 import ItemModal from "../ItemModal/ItemModal";
 import Profile from "../Profile/Profile.jsx";
+import AddItemModal from "../AddItemModal/AddItemModal.jsx";
+import Register from "../RegisterModal/RegisterModal.jsx";
+import Login from "../LoginModal/LoginModal.jsx";
+import CurrentUserContext from "../../contexts/CurrentUserContext.js";
+import EditProfileModal from "../EditProfileModal/EditProfileModal.jsx";
+import auth from "../../utils/auth.js";
+import { checkToken } from "../../utils/auth.js";
+
 import { filterWeatherData, getWeather } from "../../utils/weatherApi";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
-import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import {
   deleteCard,
   getItems,
   addItem,
   addCardLike,
   removeCardLike,
+  updateProfile,
 } from "../../utils/api.js";
-import auth from "../../utils/auth.js";
-import Register from "../RegisterModal/RegisterModal.jsx";
-import Login from "../LoginModal/LoginModal.jsx";
-import { checkToken } from "../../utils/auth.js";
-import CurrentUserContext from "../../contexts/CurrentUserContext.js";
-import EditProfileModal from "../EditProfileModal/EditProfileModal.jsx";
-import { updateProfile } from "../../utils/api.js";
+import { coordinates, APIkey } from "../../utils/constants";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -46,10 +47,6 @@ function App() {
 
   const setToken = (token) => {
     localStorage.setItem("token", token);
-  };
-
-  const getToken = () => {
-    return localStorage.getItem("token");
   };
 
   const handleToggleSwitchChange = () => {
@@ -84,25 +81,21 @@ function App() {
       setClothingItems((prevItems) => [item, ...prevItems]);
       closeActiveModal();
     } catch (error) {
-      console.error(error);
+      console.error("Failed to add item:", error);
     }
   };
 
   const handleDeleteCard = async (item) => {
     const token = localStorage.getItem("token");
 
-    console.log("Delete button clicked, item:", item);
     try {
-      console.log("About to call deleteCard API with ID:", item._id);
       await deleteCard({ id: item._id, token });
-      console.log("API call successful, updating state");
+
       setClothingItems((prevItems) =>
         prevItems.filter((card) => item._id !== card._id)
       );
       closeActiveModal();
-      console.log("Delete completed successfully");
     } catch (error) {
-      console.error(error);
       console.error("Delete failed:", error);
     }
   };
@@ -149,7 +142,6 @@ function App() {
 
     try {
       await auth.register(name, password, email, avatar);
-      // Automatically log them in
       await handleLogin({ email, password });
     } catch (error) {
       console.error("Registration failed:", error);
@@ -228,6 +220,10 @@ function App() {
     navigate("/");
   };
 
+  function ProtectedRoute({ children, isLoggedIn }) {
+    return isLoggedIn ? children : <Navigate to="/" />;
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <CurrentTemperatureUnitContext.Provider
@@ -252,22 +248,26 @@ function App() {
                     clothingItems={clothingItems}
                     onDeleteItem={handleDeleteCard}
                     handleCardLike={handleCardLike}
+                    isLoggedIn={isLoggedIn}
                   />
                 }
               />
               <Route
                 path="/profile"
                 element={
-                  <Profile
-                    weatherData={weatherData}
-                    clothingItems={clothingItems}
-                    handleCardClick={handleCardClick}
-                    handleAddClick={handleAddClick}
-                    onDeleteItem={handleDeleteCard}
-                    handleEditProfile={handleEditProfile}
-                    handleCardLike={handleCardLike}
-                    handleSignOut={handleSignOut}
-                  />
+                  <ProtectedRoute isLoggedIn={isLoggedIn}>
+                    <Profile
+                      weatherData={weatherData}
+                      clothingItems={clothingItems}
+                      handleCardClick={handleCardClick}
+                      handleAddClick={handleAddClick}
+                      onDeleteItem={handleDeleteCard}
+                      handleEditProfile={handleEditProfile}
+                      handleCardLike={handleCardLike}
+                      handleSignOut={handleSignOut}
+                      isLoggedIn={isLoggedIn}
+                    />
+                  </ProtectedRoute>
                 }
               />
             </Routes>

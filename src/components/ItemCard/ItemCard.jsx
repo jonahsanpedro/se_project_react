@@ -3,7 +3,7 @@ import { useContext } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext.js";
 import likebutton from "../../assets/likebutton.svg";
 
-function ItemCard({ onCardClick, item, onCardLike }) {
+function ItemCard({ onCardClick, item, onCardLike, isLoggedIn }) {
   const handleCardClick = () => {
     onCardClick(item);
   };
@@ -12,7 +12,10 @@ function ItemCard({ onCardClick, item, onCardLike }) {
 
   console.log("Item data:", item);
   // Check if current user has liked this item
-  const isLiked = item?.likes?.some((id) => id === currentUser._id) || false;
+  const isLiked =
+    item?.likes?.some(
+      (id) => currentUser && currentUser._id && id === currentUser._id
+    ) || false;
 
   // Handle like button click
   const handleLike = () => {
@@ -34,7 +37,7 @@ function ItemCard({ onCardClick, item, onCardLike }) {
         alt={item.name}
       />
 
-      {currentUser && (
+      {isLoggedIn && currentUser && (
         <button className={itemLikeButtonClassName} onClick={handleLike}>
           <img src={likebutton} alt="Like button" />
         </button>
