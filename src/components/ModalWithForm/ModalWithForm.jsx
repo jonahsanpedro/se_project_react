@@ -1,6 +1,6 @@
 import close from "../../assets/closedark.svg";
 import "./ModalWithForm.css";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 function ModalWithForm({
   children,
@@ -9,6 +9,9 @@ function ModalWithForm({
   isOpen,
   onClose,
   onSubmit,
+  onSwitch,
+  activeModal = "",
+  data = {},
 }) {
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
@@ -29,6 +32,14 @@ function ModalWithForm({
     return () => document.removeEventListener("keydown", handleEscapeKey);
   }, [isOpen, onClose]);
 
+  const formRef = useRef(null);
+
+  const isFormValid = () => {
+    const form = formRef.current;
+    if (!form) return false;
+    return form.checkValidity();
+  };
+
   return (
     <div
       className={`modal ${isOpen ? "modal_opened" : ""}`}
@@ -39,14 +50,27 @@ function ModalWithForm({
         <button onClick={onClose} type="button" className="modal__close">
           <img src={close} alt="Close" className="modal__close-icon" />
         </button>
-        <div className="modal__buttons">
-          <form onSubmit={onSubmit} className="modal__form">
-            {children}
-            <button type="submit" className="modal__submit">
+        <form onSubmit={onSubmit} className="modal__form" ref={formRef}>
+          {children}
+          <div className="modal__buttons">
+            <button
+              type="submit"
+              className="modal__submit"
+              disabled={!isFormValid()}
+            >
               {buttonText}
             </button>
-          </form>
-        </div>
+            {onSwitch && ["register", "login"].includes(activeModal) && (
+              <button
+                type="button"
+                className="modal__switch"
+                onClick={onSwitch}
+              >
+                {activeModal === "register" ? "or Log in" : "or Sign up"}
+              </button>
+            )}
+          </div>
+        </form>
       </div>
     </div>
   );

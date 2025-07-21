@@ -14,6 +14,7 @@ import CurrentUserContext from "../../contexts/CurrentUserContext.js";
 import EditProfileModal from "../EditProfileModal/EditProfileModal.jsx";
 import auth from "../../utils/auth.js";
 import { checkToken } from "../../utils/auth.js";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute.jsx";
 
 import { filterWeatherData, getWeather } from "../../utils/weatherApi";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
@@ -78,7 +79,7 @@ function App() {
     const token = localStorage.getItem("token");
     try {
       const item = await addItem({ name, imageUrl, weather, token });
-      setClothingItems((prevItems) => [item, ...prevItems]);
+      setClothingItems((prevItems) => [item.data, ...prevItems]);
       closeActiveModal();
     } catch (error) {
       console.error("Failed to add item:", error);
@@ -161,7 +162,7 @@ function App() {
             setToken(data.token);
             setIsLoggedIn(true);
             setCurrentUser(userData);
-            setActiveModal("");
+            closeActiveModal();
             navigate("/profile");
           })
           .catch((error) => {
@@ -219,10 +220,6 @@ function App() {
     setCurrentUser({});
     navigate("/");
   };
-
-  function ProtectedRoute({ children, isLoggedIn }) {
-    return isLoggedIn ? children : <Navigate to="/" />;
-  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -293,6 +290,7 @@ function App() {
             handleRegistration={handleRegistration}
             handleLoginClick={handleLoginClick}
             onSwitch={handleLoginClick}
+            activeModal={activeModal}
           />
           <Login
             path="/login"
@@ -301,6 +299,8 @@ function App() {
             handleLogin={handleLogin}
             handleLoginClick={handleLoginClick}
             handleRegistrationClick={handleRegistrationClick}
+            onSwitch={handleRegistrationClick}
+            activeModal={activeModal}
           />
           <EditProfileModal
             isOpen={isEditProfileModalOpen}

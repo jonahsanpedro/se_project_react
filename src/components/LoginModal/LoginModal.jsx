@@ -1,13 +1,27 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./LoginModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { use } from "react";
 
-const Login = ({ handleLogin, onClose, isOpen, handleRegistrationClick }) => {
+const Login = ({
+  handleLogin,
+  onClose,
+  isOpen,
+  handleRegistrationClick,
+  activeModal = "",
+}) => {
   const [data, setData] = useState({
     email: "",
     password: "",
   });
+
+  useEffect(() => {
+    setData({
+      email: "",
+      password: "",
+    });
+  }, [isOpen]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,8 +32,6 @@ const Login = ({ handleLogin, onClose, isOpen, handleRegistrationClick }) => {
   };
 
   const handleSubmit = (e) => {
-    console.log("handleSubmit called");
-    console.log("data:", data);
     e.preventDefault();
     handleLogin(data);
   };
@@ -32,15 +44,16 @@ const Login = ({ handleLogin, onClose, isOpen, handleRegistrationClick }) => {
   return (
     <ModalWithForm
       title="Login"
-      name="email"
       buttonText="Log in"
       onClose={onClose}
       isOpen={isOpen}
       onSubmit={handleSubmit}
       onSwitch={OnSwitch}
+      activeModal={activeModal}
+      data={data}
     >
       <div className="login">
-        <label htmlFor="name">Email:</label>
+        <label htmlFor="email">Email:</label>
         <input
           id="email"
           required
@@ -62,12 +75,6 @@ const Login = ({ handleLogin, onClose, isOpen, handleRegistrationClick }) => {
           className="login__input"
           placeholder="Password"
         />
-
-        <div className="login__signup">
-          <button onClick={OnSwitch} className="login__signup-link">
-            or Sign up
-          </button>
-        </div>
       </div>
     </ModalWithForm>
   );

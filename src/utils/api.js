@@ -40,12 +40,7 @@ const updateProfile = (name, avatar, token) => {
       authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({ name, avatar }),
-  }).then((res) => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Error: ${res.status}`);
-  });
+  }).then(processResponse);
 };
 
 const addCardLike = (id, token) => {
@@ -55,12 +50,7 @@ const addCardLike = (id, token) => {
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     },
-  }).then((res) => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Error: ${res.status}`);
-  });
+  }).then(processResponse);
 };
 
 const removeCardLike = (id, token) => {
@@ -70,12 +60,7 @@ const removeCardLike = (id, token) => {
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     },
-  }).then((res) => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Error: ${res.status}`);
-  });
+  }).then(processResponse);
 };
 
 export {

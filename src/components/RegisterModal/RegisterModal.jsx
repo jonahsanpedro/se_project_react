@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect, act } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./RegisterModal.css";
+import { use } from "react";
 
 const Register = ({
   handleRegistration,
   onClose,
   isOpen,
   handleLoginClick,
+  activeModal = "",
 }) => {
   const [data, setData] = useState({
     name: "",
@@ -32,15 +34,18 @@ const Register = ({
     setData({ ...data, password: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    handleRegistration(data);
+  useEffect(() => {
     setData({
       name: "",
       avatar: "",
       email: "",
       password: "",
     });
+  }, [isOpen]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleRegistration(data);
   };
 
   const onSwitch = () => {
@@ -51,12 +56,15 @@ const Register = ({
   return (
     <ModalWithForm
       title="Sign Up"
-      name="register"
+      name="email"
+      password="password"
       buttonText="Sign up"
       onClose={onClose}
       isOpen={isOpen}
       onSubmit={handleSubmit}
       onSwitch={onSwitch}
+      activeModal={activeModal}
+      data={data}
     >
       <div className="register">
         <label htmlFor="email">Email</label>
@@ -103,12 +111,6 @@ const Register = ({
           className="register__input"
           required
         />
-
-        <div className="register__signin">
-          <button className="register__login-link" onClick={onSwitch}>
-            or Log in
-          </button>
-        </div>
       </div>
     </ModalWithForm>
   );

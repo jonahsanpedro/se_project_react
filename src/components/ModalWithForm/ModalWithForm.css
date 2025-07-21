@@ -91,6 +91,33 @@
   border-radius: 4px;
   color: white;
   cursor: pointer;
+  padding: 0;
+  margin-right: 12px;
+}
+
+.modal__switch {
+  font-family: "Cabinet Grotesk", Arial, sans-serif;
+  background-color: transparent;
+  border: none;
+  color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.modal__submit:disabled {
+  background-color: #bdbdbd;
+  cursor: not-allowed;
+}
+
+.modal__buttons {
+  display: flex;
+  align-items: center;
+  margin-top: 32px;
+}
+
+.modal__form {
+  display: flex;
+  flex-direction: column;
 }
 
 .modal__submit:hover {

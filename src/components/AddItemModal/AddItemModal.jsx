@@ -21,14 +21,15 @@ export default function AddItemModal({
     setWeather(e.target.value);
   };
 
+  useEffect(() => {
+    setName("");
+    setImageUrl("");
+    setWeather("");
+  }, [isOpen]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     onAddItemModalSubmit({ name, imageUrl, weather });
-    useEffect(() => {
-      setName("");
-      setImageUrl("");
-      setWeather("");
-    }, [isOpen]);
   };
 
   return (
@@ -40,7 +41,7 @@ export default function AddItemModal({
       isOpen={isOpen}
       onSubmit={handleSubmit}
     >
-      <label htmlFor="name" className="modal__label">
+      <label className="modal__label">
         Name{" "}
         <input
           type="text"
@@ -55,7 +56,7 @@ export default function AddItemModal({
           maxLength="30"
         />
       </label>
-      <label htmlFor="imageUrl" className="modal__label">
+      <label className="modal__label">
         Image{" "}
         <input
           name="imageUrl"
@@ -70,7 +71,7 @@ export default function AddItemModal({
       </label>
       <fieldset className="modal__radio-buttons">
         <legend className="modal__legend">Select the weather type:</legend>
-        <label htmlFor="hot" className="modal__label modal__label_type_radio">
+        <label className="modal__label modal__label_type_radio">
           <input
             name="weatherType"
             id="hot"
@@ -82,7 +83,7 @@ export default function AddItemModal({
           />{" "}
           Hot
         </label>
-        <label htmlFor="warm" className="modal__label modal__label_type_radio">
+        <label className="modal__label modal__label_type_radio">
           <input
             name="weatherType"
             id="warm"
@@ -94,7 +95,7 @@ export default function AddItemModal({
           />{" "}
           Warm
         </label>
-        <label htmlFor="cold" className="modal__label modal__label_type_radio">
+        <label className="modal__label modal__label_type_radio">
           <input
             name="weatherType"
             id="cold"
