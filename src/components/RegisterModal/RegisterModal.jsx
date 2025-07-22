@@ -67,9 +67,9 @@ const Register = ({
       data={data}
     >
       <div className="register">
-        <label htmlFor="email">Email</label>
+        <label htmlFor="register email">Email</label>
         <input
-          id="email"
+          id="register email"
           name="email"
           type="email"
           placeholder="Email"
@@ -78,9 +78,9 @@ const Register = ({
           className="register__input"
           required
         />
-        <label htmlFor="password">Password</label>
+        <label htmlFor="register password">Password</label>
         <input
-          id="password"
+          id="register password"
           name="password"
           type="password"
           placeholder="Password"
@@ -89,9 +89,9 @@ const Register = ({
           className="register__input"
           required
         />
-        <label htmlFor="name">Name</label>
+        <label htmlFor="register name">Name</label>
         <input
-          id="name"
+          id="register name"
           name="name"
           type="text"
           placeholder="Name"
@@ -100,9 +100,9 @@ const Register = ({
           className="register__input"
           required
         />
-        <label htmlFor="avatar">Avatar URL:</label>
+        <label htmlFor="register avatar">Avatar URL:</label>
         <input
-          id="avatar"
+          id="register avatar"
           name="avatar"
           type="url"
           placeholder="Avatar URL"

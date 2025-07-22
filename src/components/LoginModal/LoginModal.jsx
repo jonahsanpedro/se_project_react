@@ -53,9 +53,9 @@ const Login = ({
       data={data}
     >
       <div className="login">
-        <label htmlFor="email">Email:</label>
+        <label htmlFor="login email">Email:</label>
         <input
-          id="email"
+          id="login email"
           required
           name="email"
           type="email"
@@ -64,9 +64,9 @@ const Login = ({
           className="login__input"
           placeholder="Email"
         />
-        <label htmlFor="password">Password:</label>
+        <label htmlFor="login password">Password:</label>
         <input
-          id="password"
+          id="login password"
           required
           name="password"
           type="password"
