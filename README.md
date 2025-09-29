@@ -1,3 +1,25 @@
+# Project 14 - summary
+
+Full-Stack Frontend Integration for WTWR
+
+Integrated frontend React application with the previously built Express/MongoDB backend, enabling seamless communication via protected API calls.
+
+Implemented user registration and authentication on the frontend with RegisterModal and LoginModal components, sending requests to /signup and /signin endpoints; stored JWT tokens in localStorage for session persistence.
+
+Created a CurrentUserContext to manage and share logged-in user state across the application, ensuring dynamic rendering of UI elements based on authorization status.
+
+Updated Header, ItemModal, and ClothesSection components to conditionally display UI elements such as user avatars, edit/delete buttons, and clothing items based on ownership and login state.
+
+Enabled profile editing with EditProfileModal, sending updates to the backend via authenticated requests and reflecting changes in real-time through React state.
+
+Implemented like/dislike functionality for clothing items, ensuring only authorized users could interact and maintaining consistent state updates without manual DOM manipulation.
+
+Added sign-out functionality, clearing JWT tokens from localStorage and updating application state to log out users securely.
+
+Ensured route protection on the frontend by redirecting unauthorized users from protected pages to the main landing page.
+
+Technologies: React, JSX, Context API, JWT, localStorage, Axios/fetch, React Hooks, Express, MongoDB
+
 # Project 11 - What To Wear Today
 
 This project focuses on our What to Wear Today application. We expanded on our knowledge of React Router and included new features to our application as well as created mock API interactions through a JSON server.
