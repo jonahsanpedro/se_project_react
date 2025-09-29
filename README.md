@@ -1,4 +1,4 @@
-# Project 14 - summary
+#  What to wear - summary
 
 Full-Stack Frontend Integration for WTWR
 
